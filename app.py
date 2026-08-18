@@ -1,7 +1,6 @@
 import os
 import streamlit as st
-import google.generativeai as genai
-from pypdf import PdfReader
+from google import genai
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
@@ -57,17 +56,17 @@ api_key = os.environ.get("GEMINI_API_KEY")
 if not api_key:
     api_key = st.sidebar.text_input("Enter Gemini API Key", type="password")
 
-if api_key:
-    genai.configure(api_key=api_key)
-
 def generate_output(prompt: str):
     if not api_key:
-        st.error("API Key not configured. Please supply a GEMINI_API_KEY environment variable or enter it in the sidebar.")
+        st.error("API Key missing. Add GEMINI_API_KEY to Railway Variables or enter it in the sidebar.")
         return
     try:
-        model = genai.GenerativeModel("gemini-2.5-flash")
+        client = genai.Client(api_key=api_key)
         with st.spinner("Executing operational agent pipeline..."):
-            response = model.generate_content(prompt)
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=prompt
+            )
             st.markdown(response.text)
     except Exception as e:
         st.error(f"Execution failed: {str(e)}")

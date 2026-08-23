@@ -1,11 +1,15 @@
 import os
+from PIL import Image
 import streamlit as st
 from google import genai
+
+# Load custom icon
+favicon = Image.open("favicon-96x96.png")
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
     page_title="SYSTEM HUMAN // Operations Portal",
-    page_icon="⚡",
+    page_icon=favicon,
     layout="wide",
     initial_sidebar_state="expanded"
 )

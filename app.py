@@ -1,6 +1,7 @@
 import os
 from PIL import Image
 import streamlit as st
+import streamlit.components.v1 as components
 from google import genai
 
 # Load custom icon
@@ -12,6 +13,23 @@ st.set_page_config(
     page_icon=favicon,
     layout="wide",
     initial_sidebar_state="expanded"
+)
+
+# --- GOOGLE ANALYTICS ---
+components.html(
+    """
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C1H5BSKMFH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-C1H5BSKMFH');
+    </script>
+    """,
+    height=0,
+    width=0
 )
 
 # --- BESPOKE SYSTEM HUMAN STYLING ---

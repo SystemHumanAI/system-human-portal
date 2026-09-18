@@ -31,6 +31,17 @@ components.html(
     height=0,
     width=0
 )
+# -- HIDE SIDEBAR COLLAPSE CONTROL --
+st.markdown("""
+<style>
+[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapsedControl"],
+button[aria-label="Close sidebar"],
+button[aria-label="Open sidebar"] {
+    display: none !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # --- BESPOKE SYSTEM HUMAN STYLING ---
 st.markdown("""
